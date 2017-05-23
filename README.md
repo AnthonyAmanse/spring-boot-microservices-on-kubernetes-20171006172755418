@@ -24,8 +24,8 @@ Please follow the [Toolchain instructions](https://github.com/IBM/container-jour
 
 ## Steps
 1. [Create the Database service](#1-create-the-database-service)
-	 1.1 [Use MySQL in container](#11-use-mysql-in-container) or
-	 1.2 [Use Bluemix MySQL](#12-use-bluemix-mysql)
+  1.1 [Use MySQL in container](#11-use-mysql-in-container) or
+  1.2 [Use Bluemix MySQL](#12-use-bluemix-mysql)
 2. [Create the Spring Boot Microservices](#2-create-the-spring-boot-microservices)
       - 2.1 [Build Projects using Maven](#21-build-your-projects-using-maven)
       - 2.2 [Build and Push Docker Images](#22-build-your-docker-images-for-spring-boot-services)
