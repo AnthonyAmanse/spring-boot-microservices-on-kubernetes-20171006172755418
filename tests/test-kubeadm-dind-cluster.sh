@@ -58,7 +58,7 @@ verify_deploy(){
             echo "Account Summary is up."
             break
         fi
-        if [ $TRIES -eq 10 ]
+        if [[ $TRIES -eq 10 ]]
         then
             echo "Failed finding Account Summary. Error code is $code"
             exit 1

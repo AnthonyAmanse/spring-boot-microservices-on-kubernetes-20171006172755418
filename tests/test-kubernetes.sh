@@ -74,12 +74,12 @@ verify_deploy(){
     for IP in $IPS; do
         while true
         do
-            code=$(curl -sw '%{http_code}' http://$IP:$NODEPORT -o /dev/null)
+            code=$(curl -sw '%{http_code}' http://"$IP":"$NODEPORT" -o /dev/null)
             if [ "$code" = "200" ]; then
                 echo "Account Summary is up."
                 break
             fi
-            if [ $TRIES -eq 10 ]
+            if [ "$TRIES" -eq 10 ]
             then
                 echo "Failed finding Account Summary. Error code is $code"
                 exit 1

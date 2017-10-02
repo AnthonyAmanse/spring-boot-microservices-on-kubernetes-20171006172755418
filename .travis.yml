@@ -1,6 +1,6 @@
+---
 language: python
 python: 2.7
-script: true
 sudo: required
 group: stable
 dist: trusty
