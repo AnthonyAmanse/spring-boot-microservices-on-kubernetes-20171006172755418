@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-if [[ "$TRAVIS_PULL_REQUEST" != "false" ]]; then
+if [[ -z "$BLUEMIX_AUTH" ]]; then
     echo -e "\033[0;33mPull Request detected; not installing extra software.\033[0m"
     exit 0
 fi

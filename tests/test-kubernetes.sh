@@ -91,8 +91,8 @@ verify_deploy(){
 }
 
 main(){
-    if [[ "$TRAVIS_PULL_REQUEST" != "false" ]]; then
-        echo -e "\033[0;33mPull Request detected; not running Kubernetes test.\033[0m"
+    if [[ -z "$BLUEMIX_AUTH" ]]; then
+        echo -e "\033[0;33mFork detected; not running Bluemix Container Service test.\033[0m"
         exit 0
     fi
 
