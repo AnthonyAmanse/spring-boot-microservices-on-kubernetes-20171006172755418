@@ -1,23 +1,23 @@
-#!/bin/bash
+#!/bin/bash -e
 
-echo "Download Bluemix CLI"
-wget --quiet --output-document=/tmp/Bluemix_CLI_amd64.tar.gz  http://public.dhe.ibm.com/cloud/bluemix/cli/bluemix-cli/latest/Bluemix_CLI_amd64.tar.gz
-tar -xf /tmp/Bluemix_CLI_amd64.tar.gz --directory=/tmp
+if [[ -z "$BLUEMIX_AUTH" ]]; then
+    echo -e "\033[0;33mPull Request detected; not installing extra software.\033[0m"
+    exit 0
+fi
 
-# Create bx alias
-echo "#!/bin/sh" >/tmp/Bluemix_CLI/bin/bx
-echo "/tmp/Bluemix_CLI/bin/bluemix \"\$@\" " >>/tmp/Bluemix_CLI/bin/bx
-chmod +x /tmp/Bluemix_CLI/bin/*
+echo "Installing Bluemix CLI"
+curl -L http://public.dhe.ibm.com/cloud/bluemix/cli/bluemix-cli/latest/Bluemix_CLI_amd64.tar.gz > Bluemix_CLI.tar.gz
+tar -xvf Bluemix_CLI.tar.gz
+sudo ./Bluemix_CLI/install_bluemix_cli
 
-export PATH="/tmp/Bluemix_CLI/bin:$PATH"
-
-# Install Armada CS plugin
-echo "Install the Bluemix container-service plugin"
+echo "Installing Bluemix container-service plugin"
 bx plugin install container-service -r Bluemix
 
-echo "Install kubectl"
-wget --quiet --output-document=/tmp/Bluemix_CLI/bin/kubectl  https://storage.googleapis.com/kubernetes-release/release/"$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)"/bin/linux/amd64/kubectl
-chmod +x /tmp/Bluemix_CLI/bin/kubectl
+echo "Installing kubectl"
+curl -LO https://storage.googleapis.com/kubernetes-release/release/"$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)"/bin/linux/amd64/kubectl
+chmod 0755 kubectl
+sudo mv kubectl /usr/local/bin
+
 
 if [ -n "$DEBUG" ]; then
   bx --version
